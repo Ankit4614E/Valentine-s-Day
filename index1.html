@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
+            background-size: 200% 200%;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            transition: all 0.5s ease;
+            animation: gradientBG 10s ease infinite;
+            cursor: url("./src/icons8-heart-16.png"), auto;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeIn 2s ease-in-out, float 3s infinite alternate ease-in-out;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            background: linear-gradient(45deg, #ff0066, #ff4593);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heartbeat 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #333;
+            animation: slideIn 2s ease-in-out;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff0066, #ff4593);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 0, 102, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 102, 0.4);
+            background: linear-gradient(45deg, #ff4593, #ff0066);
+        }
+
+        .gallery-page {
+            display: none;
+            background: linear-gradient(135deg, #fff5f7, #ffe5ee);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            padding-left: 60px;
+            -webkit-text-fill-color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            background: linear-gradient(45deg,  #151415, #ff69b4);
+            padding: 10px 25px;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(45deg,  #ff69b4, #ff69b4);
+            transform: translateX(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding-bottom: 50px;
+        }
+
+        .gallery-item {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            background: white;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 105, 180, 0.2);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit:cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item p {
+            font-size: 1rem;
+            color: #333;
+            margin: 15px 0;
+            padding: 0 10px;
+            background: linear-gradient(45deg, #151415, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            from { transform: translateY(0); }
+            to { transform: translateY(-10px); }
+        }
+
+        @keyframes floatingHeart {
+            0% { transform: translateY(100vh) scale(0); }
+            50% { transform: translateY(50vh) scale(1); }
+            100% { transform: translateY(-100px) scale(0); }
+        }
+
+        /* Rest of the CSS remains the same */
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+                padding-left: 70px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                max-height: 80vh;
+                overflow-y: auto;
+                padding-bottom: 0%;
+            }
+
+            .btn {
+                font-size: 0.9rem;
+                padding: 10px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.6rem;
+                padding-left: 25px;
+                line-height: 1.3;
+            }
+
+            .back-btn {
+                 padding: 8px 12px;
+                font-size: 0.5rem;
+                left: 10px;
+                }
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+                padding: 0 10px;
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+
+            .gallery-item p {
+                font-size: 0.85rem;
+                margin: 10px 0;    
+                line-height: 1.4;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                line-height: 1.3;
+                text-align: center;
+            }
+
+            p {
+                font-size: 0.85rem;
+                line-height: 1.4;
+            }
+        }
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 15px;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.transition-page {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.transition-page.active {
+  opacity: 1;
+}
+    /* Align the music icon in the top-right corner */
+/* Change the color of the music icon when clicked */
+.header .music-icon {
+  position: absolute;
+  top: 30px;
+  right: 28px;
+  width: 40px;
+  height: 40px;
+  background-image: url('./src/icons8-earbud-headphones-48.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+}
+
+.header .music-icon.playing {
+  filter: invert(50%) sepia(80%) saturate(500%) hue-rotate(290deg) brightness(105%) contrast(103%);
+}
+
+/* Restart the song when double-clicked */
+.header .music-icon {
+  touch-action: manipulation;
+}
+
+.header .music-icon:active {
+  transform: scale(0.9);
+}
+
+.header .music-icon:active:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header .music-icon {
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header .music-icon {
+    top: 15px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="hearts"></div>
+    <div class="card">
+        <h1 onclick="navigateToValentinesPage()">Happy Valentine's Day ❤️</h1>
+        <p>You are the love of my life. Wishing you a day full of joy and romance! 💕</p>
+        <button class="btn" onclick="openGallery()">Open Photo Gallery</button>
+        <button class="btn" onclick="toggleHearts()">Toggle Falling Hearts</button>
+    </div>
+    <div id="galleryPage" class="gallery-page">
+        <div class="header">
+            <a href="#" class="back-btn" onclick="goBack()">← Back </a>
+            <h1>Our Precious Memories</h1>
+            <div class="music-icon" onclick="toggleMusic()"></div>
+    
+            <!-- Music player -->
+            <audio id="audio-player" src="./src/Mulaqat - Prateek Kuhad 128 Kbps.mp3"></audio>
+        </div>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="./src/IMG-20230815-WA0054.jpg" alt="First Photo" onclick="openPopup(this)">
+                <p>First Photo 📷</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG_20240204_00203276.jpeg" alt="First Durga Puja" onclick="openPopup(this)">
+                <p>First Durga Puja </p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG_20231227_003135.jpg" alt="Happy Happy" onclick="openPopup(this)">
+                <p>Smiling With You🥰</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG-20240308-WA0097.jpg" alt="Beach" onclick="openPopup(this)">
+                <p>Beach ⛱️</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG_20231227_003352.jpg" alt="Special Day" onclick="openPopup(this)">
+                <p>Trip With You</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG-20231227-WA0024.jpg" alt="Sunset" onclick="openPopup(this)">
+                <p>Sunset 🌅</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG-20231227-WA0029.jpg" alt="Date" onclick="openPopup(this)">
+                <p>Date With You❤️</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/Snapchat-1992191835.jpg" alt="Holding Hands" onclick="openPopup(this)">
+                <p>Holding Hands🤝</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG20231022191830.jpg" alt="Park" onclick="openPopup(this)">
+                <p>Trying Candid</p>
+            </div>
+            <div class="gallery-item">
+                <img src="./src/IMG-20231227-WA0003.jpg" alt="Smile" onclick="openPopup(this)">
+                <p>Your Smile💓</p>
+            </div>
+        </div>
+    </div>
+    <div id="popup" class="popup" onclick="closePopup(event)">
+        <button class="close-btn" onclick="closePopup(event)">✖</button>
+        <img src="" alt="Popup Image">
+    </div>
+  </div>
+    <script>
+        let heartsEnabled = false;
+        
+        function openGallery() {
+            document.querySelector('.card').style.display = 'none';
+            document.getElementById('galleryPage').style.display = 'block';
+        }
+
+        function goBack() {
+            document.querySelector('.card').style.display = 'block';
+            document.getElementById('galleryPage').style.display = 'none';
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.position = 'absolute';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animation = `floatingHeart ${Math.random() * 2 + 3}s linear`;
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.transform = `rotate(${Math.random() * 360}deg)`;
+            
+            document.querySelector('.hearts').appendChild(heart);
+            
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        function toggleHearts() {
+            heartsEnabled = !heartsEnabled;
+            if (heartsEnabled) {
+                heartInterval = setInterval(() => {
+                    if (heartsEnabled) {
+                        createHeart();
+                    }
+                }, 300);
+            } else {
+                clearInterval(heartInterval);
+            }
+        }
+
+        // Add touch support for mobile devices
+        document.addEventListener('touchstart', function(e) {
+            const gallery = document.querySelector('.gallery');
+            if (gallery.contains(e.target)) {
+                e.target.closest('.gallery-item')?.classList.add('active');
+            }
+        });
+
+        document.addEventListener('touchend', function(e) {
+            const gallery = document.querySelector('.gallery');
+            if (gallery.contains(e.target)) {
+                e.target.closest('.gallery-item')?.classList.remove('active');
+            }
+        });
+        function openPopup(img) {
+    const popup = document.getElementById('popup');
+    const popupImage = popup.querySelector('img');
+    popupImage.src = img.src;
+    popup.style.display = 'flex';
+}
+
+function closePopup(event) {
+    if (event.target.tagName !== 'IMG') {
+        document.getElementById('popup').style.display = 'none';
+    }
+}
+function navigateToValentinesPage() {
+  const body = document.querySelector('body');
+  body.classList.add('transition-page');
+  setTimeout(() => { window.location.href = 'vday.html'; }, 500);
+}
+let isPlaying = false;
+
+function toggleMusic() {
+  const audioPlayer = document.getElementById('audio-player');
+  const musicIcon = document.querySelector('.music-icon');
+
+  if (isPlaying) {
+    audioPlayer.pause();
+    audioPlayer.currentTime = 0; // Reset the song
+    musicIcon.classList.remove('playing');
+  } else {
+    audioPlayer.play();
+    musicIcon.classList.add('playing');
+  }
+
+  isPlaying = !isPlaying;
+}
+</script>
+</body>
+</html>

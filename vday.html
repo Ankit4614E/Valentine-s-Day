@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine's Card</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="vday.css" />
+    <style>
+      /* Ensure full viewport height */
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(45deg, #ff1493, #ff69b4, #ff1493);
+        position: relative;
+        overflow: hidden; /* Prevent scrollbars */
+        border-radius: 30px; 
+        transition: all 0.5s ease;
+        animation: gradientBG 10s ease infinite;
+        cursor: url("./src/icons8-heart-16.png"), auto;
+      }
+
+      /* Back button */
+      .back-button {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        background: linear-gradient(45deg, #151415, #ff69b4);
+        color: white;
+        padding: 8px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        text-decoration: none;
+        z-index: 10;
+      }
+
+      .back-button:hover {
+        background-color: #d43f5e;
+      }
+
+      /* Image container */
+      .image-container {
+        max-width: 90%; /* Allow responsiveness */
+        max-height: 80vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* Hide overflow */
+        z-index: 2;
+      }
+
+      /* Make the image responsive */
+      .image-container img {
+        max-width: 50%;
+        max-height: 50%;
+        object-fit: contain; /* Ensure proper scaling */
+      }
+
+      /* Falling hearts */
+      .heart {
+        position: absolute;
+        color: red;
+        font-size: 20px;
+        opacity: 0.8;
+        animation: fall linear infinite;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(100vh);
+          opacity: 0;
+        }
+      }
+
+      /* Mobile view adjustments */
+      @media (max-width: 768px) {
+        .image-container img {
+          max-height: 95vh; /* Increase height for mobile */
+          max-width: 100%;
+        }
+
+        .back-button {
+          font-size: 14px; /* Slightly smaller text */
+          padding: 6px 12px;
+        }
+      }
+
+      /* Optional: Animation on load */
+      body.active {
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Back button -->
+    <a href="index.html" class="back-button">⬅ Back</a>
+
+    <!-- Image container -->
+    <div class="image-container">
+      <img src="./src/img.png" alt="Greeting Card">
+    </div>
+
+    <script>
+      window.addEventListener('load', function () {
+        document.body.classList.add('active');
+      });
+
+      // Create falling hearts
+      function createHeart() {
+        const heart = document.createElement("div");
+        heart.innerHTML = "❤️"; // Heart emoji
+        heart.classList.add("heart");
+
+        // Random position and size
+        const size = Math.random() * 20 + 10 + "px"; // Random size between 10px and 30px
+        heart.style.fontSize = size;
+        heart.style.left = Math.random() * 100 + "vw"; // Random horizontal position
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // Random fall speed
+
+        document.body.appendChild(heart);
+
+        // Remove heart after animation ends
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+
+      // Generate hearts every 300ms
+      setInterval(createHeart, 300);
+    </script>
+  </body>
+</html>
